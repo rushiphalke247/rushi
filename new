@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dep2     #key value pair for identifying deployment 
+  name: dep2      #name of deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:            #Tells the Deployment how to find which Pods to manage
+      app: dep2
+  strategy: {}
+  template:             #how pods looklike 
+    metadata:
+      labels:
+        app: dep2
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: 
+          requests: 
+            memory: "100Mi"
+            cpu: "100m"       #millicores
+          limits:  
+            memory: "200Mi"  
+            cpu: "500m"    #millicores
+status: {}                  #You never set status manually — it is read-only, 
+                          #automatically maintained by Kubernetes.
